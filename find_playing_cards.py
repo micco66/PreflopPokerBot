@@ -40,7 +40,6 @@ def get_playing_cards(video_in):
 
     return contours_filtered_by_shape_and_area
 
-
 def filter_contours_by_shape(contours, epsilon_factor):
     """
     Filter contours based on how closely they approximate a rectangular shape.

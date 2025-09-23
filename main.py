@@ -2,6 +2,7 @@ import cv2
 from camera import open_camera
 from roi import get_rois
 from find_playing_cards import get_playing_cards
+from isolate_playing_card import isolate_playing_card
 from isolate_suit_and_rank import isolate_suit_and_rank
 
 def main():
@@ -32,8 +33,17 @@ def main():
         card_countour = get_playing_cards(live_vdeo_ROI_frame)
 
         #crop playing cards to isolate suit and rank. 
-        suit_and_rank_image = isolate_suit_and_rank(live_vdeo_ROI_frame, card_countour)
+        if len(card_countour) == 2:
+            print("Playing cards detected, isolating suit and rank.")
+            isolate_playing_card_ROI = isolate_playing_card(live_vdeo_ROI_frame, card_countour)
+            left_playing_card_ROI = isolate_playing_card_ROI[0]
+            right_playing_card_ROI = isolate_playing_card_ROI[1]
+            #isolate_suit_and_rank = isolate_suit_and_rank(left_playing_card_ROI, right_playing_card_ROI)
+            #cv2.imshow("suit and rank isolated image", isolate_suit_and_rank)
 
+
+        else:
+            print("Playing cards not properly detected, skipping Card /suit and rank isolation.")
 
         #cv2.imshow("display threshold video", card_countour)
         
