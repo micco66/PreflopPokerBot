@@ -14,11 +14,13 @@ def get_playing_cards(video_in):
 
     #convert ROI to greyscale.
     gray_video_in = cv2.cvtColor(video_in, cv2.COLOR_BGR2GRAY)
-    #cv2.imshow('DEBUG gray VideoIn : ', gray_video_in) 
+    cv2.imshow("gray_video_in", gray_video_in)
+    cv2.moveWindow("gray_video_in", 640,0)
 
     #Threshold image. 
     _, threshold_video_in = cv2.threshold(gray_video_in, 170, 255, cv2.THRESH_BINARY) 
-    #cv2.imshow('DEBUG threshold VideoIn : ', threshold_video_in) 
+    cv2.imshow("threshold_video_in", threshold_video_in)
+    cv2.moveWindow("threshold_video_in", 790,0)
 
     #find contours in thresholded image.
     video_in_contours, _ = cv2.findContours(threshold_video_in, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -26,6 +28,7 @@ def get_playing_cards(video_in):
     #draw contours on copy of frame. 
     cv2.drawContours(video_in_copy_for_drawing, video_in_contours, -1, (0, 255, 0), 2) 
     cv2.imshow('DEBUG contours ALL contours found : ', video_in_copy_for_drawing) 
+    cv2.moveWindow('DEBUG contours ALL contours found : ', 940,0)
 
     print("Number of contours found: ", len(video_in_contours))
 
@@ -36,7 +39,8 @@ def get_playing_cards(video_in):
 
     print("DEBUG Number of contours found after filtering by shape and area: ", len(contours_filtered_by_shape_and_area))
     cv2.drawContours(video_in_copy_for_drawing_in_range_contours, contours_filtered_by_shape_and_area, -1, (0, 255, 0), 2)
-    cv2.imshow('DEBUG CONTOURS filtered by SHAPE AND AREA.  : ', video_in_copy_for_drawing_in_range_contours) 
+    cv2.imshow('DEBUG CONTOURS filtered by SHAPE AND AREA.  : ', video_in_copy_for_drawing_in_range_contours)
+    cv2.moveWindow('DEBUG CONTOURS filtered by SHAPE AND AREA.  : ', 640,180) 
 
     return contours_filtered_by_shape_and_area
 

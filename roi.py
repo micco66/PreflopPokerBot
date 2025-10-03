@@ -1,5 +1,6 @@
 import cv2
 
+#once have upgraded hardware
 def get_rois(frame):
     #using pixels on my PC not robust for other systems.
     card_roi_x, card_roi_y, card_roi_width, card_roi_height = 300, 320, 150, 150 

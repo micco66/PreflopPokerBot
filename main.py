@@ -20,27 +20,28 @@ def main():
             break
         
         #original live video feed. 
-        cv2.imshow("Original live video feed.(q to quit)", live_video_in_frame)
+        #cv2.imshow("Original live video feed.(q to quit)", live_video_in_frame)
+        #cv2.moveWindow("Original live video feed.(q to quit)", 0,0)
+
         live_video_with_drawn_rois = get_rois(live_video_in_frame)
         live_video_full_frame = live_video_with_drawn_rois[0]
         live_vdeo_ROI_frame = live_video_with_drawn_rois[1]
 
         #Display ROI on full video feed and just the ROI video feed.
-        cv2.imshow("ROI's drawn on full video.", live_video_full_frame)
-        cv2.imshow("just ROI video feed. ", live_vdeo_ROI_frame)
+        cv2.imshow("ROI's drawn on video in", live_video_full_frame)
+        cv2.moveWindow("ROI's drawn on video in", 0,0)
 
         #find playing cards in ROI video feed.
         card_countour = get_playing_cards(live_vdeo_ROI_frame)
 
         #crop playing cards to isolate suit and rank. 
         if len(card_countour) == 2:
-            print("Playing cards detected, isolating suit and rank.")
+            print("Playing cards detected, isolating playing card.")
             isolate_playing_card_ROI = isolate_playing_card(live_vdeo_ROI_frame, card_countour)
-            left_playing_card_ROI = isolate_playing_card_ROI[0]
-            right_playing_card_ROI = isolate_playing_card_ROI[1]
-            #isolate_suit_and_rank = isolate_suit_and_rank(left_playing_card_ROI, right_playing_card_ROI)
+            left_playing_card = isolate_playing_card_ROI[0]
+            right_playing_card = isolate_playing_card_ROI[1]
+            left_suit_rank, right_suit_rank = isolate_suit_and_rank(left_playing_card, right_playing_card)
             #cv2.imshow("suit and rank isolated image", isolate_suit_and_rank)
-
 
         else:
             print("Playing cards not properly detected, skipping Card /suit and rank isolation.")

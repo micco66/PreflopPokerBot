@@ -31,7 +31,9 @@ def isolate_playing_card(video_in, card_contour):
     right_playing_card_ROI = video_in[right_playing_card_countour_y1:right_playing_card_countour_y1 + right_playing_card_countour_h1, right_playing_card_countour_x1:right_playing_card_countour_x1 + right_playing_card_countour_w1].copy()
     
     cv2.imshow("DEBUG left playing card ROI", left_playing_card_ROI)
+    cv2.moveWindow("DEBUG left playing card ROI", 640,180+left_playing_card_countour_x1) 
     cv2.imshow("DEBUG right playing card ROI", right_playing_card_ROI)
+    cv2.moveWindow("DEBUG right playing card ROI", 640,180+right_playing_card_countour_x1) 
 
     #save the isolated playing cards as still images.
     cv2.imwrite("left_playing_card_ROI.png", left_playing_card_ROI)
